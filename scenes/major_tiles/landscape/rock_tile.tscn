@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dik0jk6ugmv7d"]
+
+[ext_resource type="Script" path="res://scripts/TileManagement/BioTile.gd" id="1_weucf"]
+[ext_resource type="Texture2D" uid="uid://cuexmw5sa7lfw" path="res://testing/Rock.tres" id="2_5ubbf"]
+[ext_resource type="Script" path="res://scripts/PointHolder.gd" id="3_xegss"]
+
+[node name="BuildableTile" type="Node2D"]
+texture_filter = 1
+position = Vector2(176, 240)
+script = ExtResource("1_weucf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_5ubbf")
+
+[node name="PointHolder" type="Node2D" parent="."]
+script = ExtResource("3_xegss")
+points = 1

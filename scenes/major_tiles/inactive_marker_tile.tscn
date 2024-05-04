@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://dc4stt48e0ukp"]
+
+[ext_resource type="Script" path="res://scripts/TileManagement/BioTile.gd" id="1_8c7k8"]
+[ext_resource type="Texture2D" uid="uid://cdia802sjao83" path="res://testing/Buildable.tres" id="2_pho0c"]
+[ext_resource type="Script" path="res://scripts/TileBehaviours/InactiveMarkerBehaviour.gd" id="3_23mwx"]
+[ext_resource type="Resource" uid="uid://vxf4533c771e" path="res://data/scene_tile_data/template_tile.tres" id="4_bjwxp"]
+[ext_resource type="Script" path="res://scripts/PointHolder.gd" id="5_kcsil"]
+
+[node name="Inactive_marker_tile" type="Node2D" node_paths=PackedStringArray("on_tick_subsystems")]
+texture_filter = 1
+position = Vector2(176, 240)
+script = ExtResource("1_8c7k8")
+is_active = true
+on_tick_subsystems = [NodePath("InactiveMarkerBehaviour")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.172549)
+texture = ExtResource("2_pho0c")
+
+[node name="InactiveMarkerBehaviour" type="Node2D" parent="."]
+script = ExtResource("3_23mwx")
+active_tile = ExtResource("4_bjwxp")
+
+[node name="PointHolder" type="Node2D" parent="."]
+script = ExtResource("5_kcsil")

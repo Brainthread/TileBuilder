@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://djiiqg238jowj"]
+
+[ext_resource type="Script" path="res://scripts/TileManagement/BioTile.gd" id="1_xmxse"]
+[ext_resource type="Texture2D" uid="uid://cdia802sjao83" path="res://testing/Buildable.tres" id="2_kcsbm"]
+[ext_resource type="Script" path="res://scripts/play_animation_on_ready.gd" id="3_ym134"]
+[ext_resource type="Script" path="res://scripts/PointHolder.gd" id="4_s3iir"]
+
+[sub_resource type="Animation" id="Animation_bfi6w"]
+resource_name = "marker_tile_glow"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.313726), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w8s3p"]
+_data = {
+"marker_tile_glow": SubResource("Animation_bfi6w")
+}
+
+[node name="BuildableTile" type="Node2D"]
+texture_filter = 1
+position = Vector2(176, 240)
+script = ExtResource("1_xmxse")
+is_template = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.44431)
+texture = ExtResource("2_kcsbm")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+deterministic = true
+libraries = {
+"": SubResource("AnimationLibrary_w8s3p")
+}
+script = ExtResource("3_ym134")
+
+[node name="PointHolder" type="Node2D" parent="."]
+script = ExtResource("4_s3iir")

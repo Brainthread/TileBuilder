@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://b4h78aphxcqu1"]
+
+[ext_resource type="Script" path="res://scripts/TileManagement/BioTile.gd" id="1_vxvk6"]
+[ext_resource type="Texture2D" uid="uid://cp87eij4um7ns" path="res://testing/Midpoint.tres" id="2_0moy4"]
+[ext_resource type="Script" path="res://scripts/TileBehaviours/LodestoneBehaviour.gd" id="3_ps0mf"]
+[ext_resource type="Resource" uid="uid://guu5iv2nov5b" path="res://data/scene_tile_data/inactive_template_tile.tres" id="4_wrb3j"]
+[ext_resource type="Script" path="res://scripts/PointHolder.gd" id="5_ehgd0"]
+
+[node name="Lodestone" type="Node2D" node_paths=PackedStringArray("on_tick_subsystems")]
+texture_filter = 1
+position = Vector2(176, 240)
+script = ExtResource("1_vxvk6")
+on_tick_subsystems = [NodePath("LodestoneBehaviour")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_0moy4")
+
+[node name="LodestoneBehaviour" type="Node2D" parent="."]
+script = ExtResource("3_ps0mf")
+build_tile = ExtResource("4_wrb3j")
+
+[node name="PointHolder" type="Node2D" parent="."]
+script = ExtResource("5_ehgd0")

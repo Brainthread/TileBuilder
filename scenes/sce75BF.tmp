@@ -1,0 +1,99 @@
+[gd_scene load_steps=13 format=3 uid="uid://b65m40xk6v6nf"]
+
+[ext_resource type="Script" path="res://scripts/BioTileMap.gd" id="1_j1a0k"]
+[ext_resource type="Script" path="res://scripts/Grid2D.gd" id="1_jo1qy"]
+[ext_resource type="Script" path="res://scripts/SceneTile2D.gd" id="3_5xwa1"]
+[ext_resource type="Script" path="res://scripts/BioPreviewManager.gd" id="3_jpbft"]
+[ext_resource type="Script" path="res://scripts/BioTileLayer.gd" id="4_6nym3"]
+[ext_resource type="Texture2D" uid="uid://t1qi8d1a8k3d" path="res://icon.svg" id="6_i8ibx"]
+[ext_resource type="Script" path="res://scripts/BioBuildManager.gd" id="7_u76u0"]
+[ext_resource type="Resource" uid="uid://vxf4533c771e" path="res://data/scene_tile_data/template_tile.tres" id="8_ng4kh"]
+[ext_resource type="Resource" uid="uid://dsq2eab2xh0au" path="res://data/scene_tile_data/midpoint_tile.tres" id="9_g8p1p"]
+[ext_resource type="Script" path="res://scenes/Validator.gd" id="10_de2tl"]
+
+[sub_resource type="PackedScene" id="PackedScene_vok24"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"names": PackedStringArray("TestTile", "Sprite2D", "position", "scale", "texture"),
+"node_count": 1,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 3, 2, 0, 3, 1, 4, 2, 0),
+"variants": [Vector2(176, 240), Vector2(0.25, 0.25), ExtResource("6_i8ibx")],
+"version": 3
+}
+
+[sub_resource type="Resource" id="Resource_0ouyw"]
+script = ExtResource("3_5xwa1")
+scene = SubResource("PackedScene_vok24")
+can_have_sub_tiles = false
+
+[node name="Scene" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="TileSystem" type="Node2D" parent="."]
+
+[node name="SceneTile2DManager" type="Node2D" parent="TileSystem"]
+script = ExtResource("1_j1a0k")
+test_tile = SubResource("Resource_0ouyw")
+
+[node name="Tile2DLayers" type="Node2D" parent="TileSystem/SceneTile2DManager"]
+
+[node name="Tiles" type="Node2D" parent="TileSystem/SceneTile2DManager/Tile2DLayers"]
+script = ExtResource("4_6nym3")
+
+[node name="Grid2D" type="Node2D" parent="TileSystem/SceneTile2DManager/Tile2DLayers/Tiles"]
+script = ExtResource("1_jo1qy")
+in_editor_color = Color(0.866667, 0.717647, 0.603922, 1)
+size = Vector2i(101, 101)
+offset = Vector2(-1616, -1616)
+
+[node name="Objects" type="Node2D" parent="TileSystem/SceneTile2DManager/Tile2DLayers"]
+z_index = -1
+
+[node name="Grid2D" type="Node2D" parent="TileSystem/SceneTile2DManager/Tile2DLayers/Objects"]
+script = ExtResource("1_jo1qy")
+in_editor_color = Color(0.741176, 0.945098, 0.898039, 0.631373)
+cell_size = 16
+size = Vector2i(101, 101)
+offset = Vector2(-808, -808)
+
+[node name="PreviewManager" type="Node2D" parent="TileSystem"]
+script = ExtResource("3_jpbft")
+
+[node name="Preview" type="Node2D" parent="TileSystem/PreviewManager"]
+
+[node name="Icon" type="Sprite2D" parent="TileSystem/PreviewManager/Preview"]
+texture = ExtResource("6_i8ibx")
+
+[node name="Part 1" type="Sprite2D" parent="TileSystem/PreviewManager/Preview/Icon"]
+visible = false
+position = Vector2(-32, -32)
+texture = ExtResource("6_i8ibx")
+
+[node name="Part 2" type="Sprite2D" parent="TileSystem/PreviewManager/Preview/Icon"]
+visible = false
+position = Vector2(32, -32)
+texture = ExtResource("6_i8ibx")
+
+[node name="Part 3" type="Sprite2D" parent="TileSystem/PreviewManager/Preview/Icon"]
+visible = false
+position = Vector2(-32, 32)
+texture = ExtResource("6_i8ibx")
+
+[node name="Part 4" type="Sprite2D" parent="TileSystem/PreviewManager/Preview/Icon"]
+visible = false
+position = Vector2(32, 32)
+texture = ExtResource("6_i8ibx")
+
+[node name="BuildManager" type="Node2D" parent="TileSystem"]
+script = ExtResource("7_u76u0")
+sample_tile = ExtResource("8_ng4kh")
+start_tile = ExtResource("9_g8p1p")
+tile_types = Array[ExtResource("3_5xwa1")]([ExtResource("9_g8p1p")])
+
+[node name="Validator" type="Node2D" parent="TileSystem/BuildManager"]
+script = ExtResource("10_de2tl")

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://ci545jqjh81om"]
+
+[ext_resource type="Script" path="res://scripts/TileManagement/BioTile.gd" id="1_fj4um"]
+[ext_resource type="Script" path="res://scripts/PointHolder.gd" id="2_ctpuh"]
+[ext_resource type="Texture2D" uid="uid://dfr2s3j2najh8" path="res://testing/Forest.tres" id="3_7hu7d"]
+
+[node name="forest" type="Node2D"]
+texture_filter = 1
+position = Vector2(176, 240)
+script = ExtResource("1_fj4um")
+
+[node name="PointHolder" type="Node2D" parent="."]
+script = ExtResource("2_ctpuh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_7hu7d")
+
+[node name="Debugger" type="Node2D" parent="."]

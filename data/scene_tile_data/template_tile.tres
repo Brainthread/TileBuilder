@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SceneTile2D" load_steps=4 format=3 uid="uid://vxf4533c771e"]
+
+[ext_resource type="PackedScene" uid="uid://djiiqg238jowj" path="res://scenes/major_tiles/marker_tile.tscn" id="1_50q3d"]
+[ext_resource type="Texture2D" uid="uid://cdia802sjao83" path="res://testing/Buildable.tres" id="1_qfbli"]
+[ext_resource type="Script" path="res://scripts/SceneTile2D.gd" id="2_8x7be"]
+
+[resource]
+script = ExtResource("2_8x7be")
+scene = ExtResource("1_50q3d")
+can_have_sub_tiles = false
+preview = ExtResource("1_qfbli")

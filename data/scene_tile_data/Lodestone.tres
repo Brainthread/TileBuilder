@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SceneTile2D" load_steps=4 format=3 uid="uid://dsq2eab2xh0au"]
+
+[ext_resource type="Texture2D" uid="uid://cp87eij4um7ns" path="res://testing/Midpoint.tres" id="1_xkbh0"]
+[ext_resource type="PackedScene" uid="uid://b4h78aphxcqu1" path="res://scenes/major_tiles/Lodestone.tscn" id="2_ctroe"]
+[ext_resource type="Script" path="res://scripts/SceneTile2D.gd" id="3_ywnmr"]
+
+[resource]
+script = ExtResource("3_ywnmr")
+scene = ExtResource("2_ctroe")
+can_have_sub_tiles = false
+preview = ExtResource("1_xkbh0")
