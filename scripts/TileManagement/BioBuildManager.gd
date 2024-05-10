@@ -28,8 +28,6 @@ func _ready():
 	update_preview(carried_node)
 	scene_tile_2d_manager.set_tile_on_layer(0, scene_tile_2d_manager.world_to_grid_position(0, Vector2(808,808)), sample_tile)
 
-
-
 func _process(delta):
 	if Input.is_action_just_pressed("Debug_Summon"):
 		_draw_tile()
@@ -100,4 +98,3 @@ func update_preview(tile_data:BioTileData):
 		if tile_data.sub_tiles[n]:
 			sub_tile_textures[n] = tile_data.sub_tiles[n].preview
 	preview_manager.set_new_preview_item (tile_data.main_tile.preview, sub_tile_textures)
-
