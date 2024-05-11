@@ -77,4 +77,3 @@ func update_preview(tile_data:BioTileData):
 		if tile_data.sub_tiles[n]:
 			sub_tile_textures[n] = tile_data.sub_tiles[n].preview
 	preview_manager.set_new_preview_item (tile_data.main_tile.preview, sub_tile_textures)
-
