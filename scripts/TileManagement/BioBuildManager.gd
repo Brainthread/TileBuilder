@@ -22,44 +22,29 @@ signal tile_placed (tile:Node2D, subtiles:Array[Node2D])
 @export var subtile_probability = 0.2
 var placement_is_legal = false
 
-#Migrate
-func _ready():
-	carried_node = $"../../TileGenerator".generate_beacon_tile()
-	update_preview(carried_node)
-	scene_tile_2d_manager.set_tile_on_layer(0, scene_tile_2d_manager.world_to_grid_position(0, Vector2(808,808)), sample_tile)
-
 func _process(delta):
-	if Input.is_action_just_pressed("Debug_Summon"):
-		_draw_tile()
-	var mouse_position = get_global_mouse_position()
-	var grid_position = scene_tile_2d_manager.world_to_grid_position(0, mouse_position)
-	var currently_targeted_tile = scene_tile_2d_manager.get_tile_on_layer(0, grid_position)[1]
-	
-	var placement_legality = is_valid_placement(grid_position, null, false) #FIX NULL
-	
-	preview_manager.set_grid_dependency(placement_legality)
-	preview_manager.set_legality(placement_legality)
-	if Input.is_action_just_pressed("Build") && placement_legality && carried_node:
-		_build_tile(grid_position, carried_node)
-		_draw_tile()
-	if Input.is_action_just_pressed("Rotate"):
-		carried_node = rotate_tile(carried_node)
+	pass
 
 #This stays
 func _build_tile(grid_position:Vector2i, tile_data:BioTileData) -> Array:
 	var node = scene_tile_2d_manager.set_tile_on_layer(0, grid_position, tile_data.main_tile)
+	print(node as Node2D)
 	node.on_placed()
 	tick_handler.ticked.connect(node.on_tick)
 	var sub_directions = [Vector2i(0, 0), Vector2i(1, 0), Vector2i(1, 1), Vector2i(0, 1)]
+	var sub_nodes = [null, null, null, null]
 	for n in 4:
 		if tile_data.sub_tiles[n] != null:
 			var sub_node = scene_tile_2d_manager.set_tile_on_layer(1, grid_position*2 + sub_directions[n], tile_data.sub_tiles[n])
-			#+ sub_directions[n]*16
 			sub_node.on_placed()
 			tick_handler.ticked.connect(sub_node.on_tick)
-	var sub_tiles = [tile_data.sub_tiles[0], tile_data.sub_tiles[1], tile_data.sub_tiles[2], tile_data.sub_tiles[3]]
-	tile_placed.emit(node, sub_tiles)
-	return [node, sub_tiles]
+			sub_nodes[n] = sub_node
+	tile_placed.emit(node, sub_nodes)
+	return [node, sub_nodes]
+
+#This stays
+func set_starter_tile(position:Vector2i):
+		scene_tile_2d_manager.set_tile_on_layer(0, scene_tile_2d_manager.world_to_grid_position(0, Vector2(808,808)), sample_tile)
 
 #This stays
 func rotate_tile (tile_data:BioTileData) -> BioTileData:
@@ -71,7 +56,7 @@ func rotate_tile (tile_data:BioTileData) -> BioTileData:
 	rotated_tile.sub_tiles[3] = tile_data.sub_tiles[0]
 	return rotated_tile
 
-#This stays?
+#This stays
 func is_valid_placement (grid_position:Vector2i, tile_data:BioTileData, marker_override:bool):
 	var currently_targeted_tile = scene_tile_2d_manager.get_tile_on_layer(0, grid_position)[1]
 	if currently_targeted_tile != null && !marker_override:
@@ -80,16 +65,10 @@ func is_valid_placement (grid_position:Vector2i, tile_data:BioTileData, marker_o
 		return true
 	return false
 
-#This stays?
+#This stays
 func _attempt_to_build_marker_tile(grid_position:Vector2i, tile_data:BioTileData):
 	if is_valid_placement(grid_position, tile_data, true):
 		scene_tile_2d_manager.set_tile_on_layer(0, grid_position, tile_data.main_tile)
-
-#Migrate
-func _draw_tile():
-	var tile_data = $"../../TileGenerator".generate_random_tile()
-	update_preview(tile_data)
-	carried_node = tile_data
 
 #This stays?
 func update_preview(tile_data:BioTileData):

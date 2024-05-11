@@ -1,7 +1,7 @@
 extends Node2D
 class_name PointHolder
 
-signal changed_point
+signal changed_points(points:int)
 signal minimum_set
 signal maximum_set
 
@@ -14,7 +14,7 @@ signal value_underloaded
 
 func add_to_point(value:int):
 	points += value
-	changed_point.emit()
+	changed_points.emit(points)
 	if points > max:
 		points = max
 		value_overloaded.emit()

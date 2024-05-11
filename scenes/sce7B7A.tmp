@@ -57,6 +57,9 @@ script = ExtResource("2_6bxet")
 
 [node name="TileGenerator" type="Node2D" parent="GameHandler"]
 script = ExtResource("1_ufcqo")
+tile_types = Array[ExtResource("3_5xwa1")]([ExtResource("10_p73a7")])
+subtile_types = Array[ExtResource("3_5xwa1")]([ExtResource("11_flvhr")])
+beacon_tile = ExtResource("9_g8p1p")
 
 [node name="PointManager" type="Node2D" parent="GameHandler"]
 script = ExtResource("5_rqtjy")
@@ -142,21 +145,19 @@ subtile_types = Array[ExtResource("3_5xwa1")]([ExtResource("11_flvhr")])
 beacon_tile = ExtResource("9_g8p1p")
 
 [node name="Camera2D" type="Camera2D" parent="GameHandler"]
-offset = Vector2(816, 816)
+offset = Vector2(808, 808)
 zoom = Vector2(2, 2)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="GameHandler/Camera2D"]
-
-[node name="Control" type="Control" parent="GameHandler/Camera2D/CanvasLayer"]
+[node name="Control" type="Control" parent="GameHandler/Camera2D"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
+offset_left = 520.0
+offset_top = 645.0
+offset_right = 560.0
+offset_bottom = 685.0
 
-[node name="Label" type="Label" parent="GameHandler/Camera2D/CanvasLayer/Control"]
+[node name="Label" type="Label" parent="GameHandler/Camera2D/Control"]
 layout_mode = 0
-offset_right = 165.0
-offset_bottom = 53.0
+offset_right = 40.0
+offset_bottom = 23.0
 text = "SCORE: "
