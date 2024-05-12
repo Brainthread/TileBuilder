@@ -16,8 +16,8 @@
 [ext_resource type="Resource" uid="uid://vxf4533c771e" path="res://data/scene_tile_data/template_tile.tres" id="8_ng4kh"]
 [ext_resource type="Resource" uid="uid://dsq2eab2xh0au" path="res://data/scene_tile_data/Lodestone.tres" id="9_g8p1p"]
 [ext_resource type="Script" path="res://scripts/TileManagement/Validator.gd" id="10_de2tl"]
-[ext_resource type="Resource" uid="uid://ccm2ib20sgmdp" path="res://data/scene_tile_data/rock_tile.tres" id="10_p73a7"]
-[ext_resource type="Resource" uid="uid://bqxryj6m2b4c8" path="res://data/scene_tile_data/sub_tiles/forest.tres" id="11_flvhr"]
+[ext_resource type="Resource" uid="uid://ccm2ib20sgmdp" path="res://data/tiles/main_tiles/rock_tile.tres" id="10_p73a7"]
+[ext_resource type="Resource" uid="uid://bqxryj6m2b4c8" path="res://data/tiles/sub_tiles/forest.tres" id="11_flvhr"]
 [ext_resource type="Script" path="res://scripts/TickHandler.gd" id="11_k3i42"]
 
 [sub_resource type="PackedScene" id="PackedScene_vok24"]
