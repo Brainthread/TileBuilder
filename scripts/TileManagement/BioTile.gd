@@ -12,8 +12,6 @@ var map_handler:BioTileMap
 var neighbours:Array
 
 func _ready():
-	if has_node("Debugger"):
-		print("Forest created")
 	for subsystem in on_tick_subsystems:
 		subsystem.interface = self
 
@@ -25,3 +23,5 @@ func on_tick ():
 	for subsystem in on_tick_subsystems:
 		subsystem.on_tick()
 
+func access_tile_position (grid_position: Vector2i, layer:int):
+	return map_handler.get_tile_on_layer(layer, grid_position)

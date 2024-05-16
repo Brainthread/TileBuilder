@@ -28,14 +28,16 @@ func _process(delta):
 #This stays
 func _build_tile(grid_position:Vector2i, tile_data:BioTileData) -> Array:
 	var node = scene_tile_2d_manager.set_tile_on_layer(0, grid_position, tile_data.main_tile)
-	print(node as Node2D)
+	node.grid_position = grid_position
 	node.on_placed()
 	tick_handler.ticked.connect(node.on_tick)
 	var sub_directions = [Vector2i(0, 0), Vector2i(1, 0), Vector2i(1, 1), Vector2i(0, 1)]
 	var sub_nodes = [null, null, null, null]
 	for n in 4:
 		if tile_data.sub_tiles[n] != null:
-			var sub_node = scene_tile_2d_manager.set_tile_on_layer(1, grid_position*2 + sub_directions[n], tile_data.sub_tiles[n])
+			var sub_node_position = grid_position*2 + sub_directions[n]
+			var sub_node = scene_tile_2d_manager.set_tile_on_layer(1, sub_node_position, tile_data.sub_tiles[n])
+			sub_node.grid_position = sub_node_position
 			sub_node.on_placed()
 			tick_handler.ticked.connect(sub_node.on_tick)
 			sub_nodes[n] = sub_node

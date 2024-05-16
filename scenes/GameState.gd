@@ -51,6 +51,8 @@ func handle_building():
 	if Input.is_action_just_pressed("Rotate"):
 		carried_node = build_manager.rotate_tile(carried_node)
 
+
+
 func set_up_tile(tile:Node2D):
 	var point_holder = tile.get_node("PointHolder")
 	point_manager.on_score_increase(point_holder.points)
