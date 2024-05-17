@@ -6,8 +6,20 @@ var carried_node
 @onready var tile_generator = $"../../TileSystem/TileGenerator"
 @onready var preview_manager = $"../../TileSystem/PreviewManager"
 @onready var point_manager = $"../../PointManager"
+@export var sub_tile_chance:float = 0.9
+@export var point_requirement_growth = 1.2
+var points_until_next_lodestone = 80
+@export var base_point_requirements = 80
+var level = 1
+var lodestones = 0
+
+func _initialize_state(state_machine_node:FiniteStateMachine, root_node:Node2D):
+	super._initialize_state(state_machine_node, root_node)
+	point_manager.increased_points.connect(_on_score_increase)
+	
 
 func _enter_state():
+	points_until_next_lodestone = base_point_requirements
 	carried_node = tile_generator.generate_beacon_tile()
 	build_manager.update_preview(carried_node)
 	_set_starter_tile()
@@ -25,11 +37,29 @@ func _state_update(_delta: float):
 func _state_physics_update(_delta: float):
 	pass
 
+func _on_score_increase(increase:int):
+	while increase > 0:
+		var diff = points_until_next_lodestone - increase
+		if diff > 0:
+			points_until_next_lodestone -= increase
+			break
+		elif diff <= 0:
+			increase = -diff
+			level += 1
+			points_until_next_lodestone = base_point_requirements * pow(point_requirement_growth, level)
+			lodestones += 1
+			print("points_until_next_lodestone")
+
 func _draw_tile():
-	var tile_data = tile_generator.generate_random_tile()
+	var tile_data = null
+	if lodestones > 0:
+		tile_data = tile_generator.generate_beacon_tile()
+		lodestones -= 1
+	else:
+		tile_data = tile_generator.generate_random_tile(sub_tile_chance)	
 	carried_node = tile_data
 	build_manager.update_preview(carried_node)
-	
+
 
 func handle_building():
 	var mouse_position = build_manager.get_global_mouse_position()
@@ -50,7 +80,6 @@ func handle_building():
 		_draw_tile()
 	if Input.is_action_just_pressed("Rotate"):
 		carried_node = build_manager.rotate_tile(carried_node)
-
 
 
 func set_up_tile(tile:Node2D):
